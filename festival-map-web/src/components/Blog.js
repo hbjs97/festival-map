@@ -76,7 +76,7 @@ function Blog(props) {
             ))}
           </Grid>
           <Grid container spacing={5} sx={{ mt: 3 }}>
-            <Main title="Posts" />
+            <Main />
             <Sidebar title={sidebar.title} description={sidebar.description} archives={sidebar.archives} />
           </Grid>
         </main>

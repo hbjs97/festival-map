@@ -3,6 +3,7 @@ import _ from 'lodash';
 
 export async function FAXIOS(data, authKey, method, url) {
   try {
+    console.log(url);
     const result = await axios({
       method: method,
       url: url,
@@ -14,11 +15,12 @@ export async function FAXIOS(data, authKey, method, url) {
     });
     return result;
   } catch (error) {
-    if (error.response.status == 401) {
+    if (error.response?.status == 401) {
       localStorage.clear();
       window.location.replace('/');
       return '토큰 인증 실패';
     }
+    console.log(error);
     return error.response.data.error;
   }
 }
