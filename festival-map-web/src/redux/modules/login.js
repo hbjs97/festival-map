@@ -1,5 +1,6 @@
 import { FAXIOS } from '../../lib/common';
-import { API_ROUTE } from '../../lib/constant';
+import { API_ROUTE, STAGING } from '../../lib/constant';
+import qs from 'qs';
 
 export const LOGOUT = 'festival-map/login/LOGOUT';
 export const LOGIN_REQUEST = 'festival-map/login/LOGIN_REQUEST';
@@ -91,23 +92,16 @@ export default function reducer(state = initState, action) {
   return state;
 }
 
-export function loginThunk(user_name, password, history) {
+export function loginThunk(loginInfo, history) {
   return async (dispatch) => {
     try {
       dispatch(setLoginRequest());
-      const formData = new FormData();
-      formData.append('user_name', user_name);
-      formData.append('password', password);
-
-      const result = await FAXIOS(formData, null, 'post', API_ROUTE.login);
-      if (typeof result == 'string') {
-        throw new Error(result);
+      const res = await FAXIOS(qs.stringify(loginInfo), null, 'post', `${STAGING}/api/login`);
+      if (res.status >= 400) {
+        throw new Error(res.message);
       }
-      localStorage.setItem('accessToken', result.data.accessToken);
-      localStorage.setItem('expires', result.data.expires);
-      localStorage.setItem('expires_refresh', result.data.expires_refresh);
-      localStorage.setItem('refreshToken', result.data.refreshToken);
-      dispatch(setLoginSuccess(result.data));
+      localStorage.setItem('accessToken', res.data.access_token);
+      dispatch(setLoginSuccess(res.data));
       history.push('/');
     } catch (error) {
       dispatch(setLoginFail());
@@ -119,12 +113,6 @@ export function loginThunk(user_name, password, history) {
 export function logoutThunk() {
   return async (dispatch) => {
     try {
-      if (localStorage.getItem('accessToken')) {
-        const result = await FAXIOS(null, localStorage.getItem('accessToken'), 'post', API_ROUTE.logout);
-        if (typeof result == 'string') {
-          throw new Error(result);
-        }
-      }
       localStorage.clear();
       dispatch(setLogout());
     } catch (error) {
@@ -137,15 +125,12 @@ export function refreshThunk() {
   return async (dispatch) => {
     try {
       dispatch(setRefreshRequest());
-      const result = await FAXIOS(null, localStorage.getItem('refreshToken'), 'post', `${API_ROUTE.auth}/refresh`);
-      if (typeof result == 'string') {
-        throw new Error(result);
+      const res = await FAXIOS(null, localStorage.getItem('refreshToken'), 'post', `${API_ROUTE.auth}/refresh`);
+      if (res.status >= 400) {
+        throw new Error(res.message);
       }
-      localStorage.setItem('accessToken', result.data.accessToken);
-      localStorage.setItem('expires', result.data.expires);
-      localStorage.setItem('expires_refresh', result.data.expires_refresh);
-      localStorage.setItem('refreshToken', result.data.refreshToken);
-      dispatch(setLoginSuccess(result.data));
+      localStorage.setItem('accessToken', res.data.access_token);
+      dispatch(setLoginSuccess(res.data));
     } catch (error) {
       dispatch(setLoginFail());
       alert(error);

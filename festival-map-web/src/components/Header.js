@@ -1,4 +1,3 @@
-import * as React from 'react';
 import PropTypes from 'prop-types';
 import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
@@ -7,13 +6,23 @@ import SearchIcon from '@mui/icons-material/Search';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 import { useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { LOGIN_SUCCESS, logoutThunk } from '../redux/modules/login';
+import { useCallback } from 'react';
 
 function Header(props) {
   const { sections, title } = props;
   const history = useHistory();
+  const dispatch = useDispatch();
+  const loginStates = useSelector((state) => state.login);
+  const isLogin = loginStates.type === LOGIN_SUCCESS;
+
+  const logout = useCallback(() => {
+    dispatch(logoutThunk());
+  }, [dispatch]);
 
   return (
-    <React.Fragment>
+    <>
       <Toolbar sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Typography component="h2" variant="h5" color="inherit" align="center" noWrap sx={{ flex: 1 }}>
           {title}
@@ -25,10 +34,15 @@ function Header(props) {
           variant="outlined"
           size="small"
           onClick={() => {
-            history.push('/signup');
+            if (isLogin) {
+              logout();
+              history.push('/');
+            } else {
+              history.push('/login');
+            }
           }}
         >
-          Sign up
+          {isLogin ? 'Logout' : 'Login'}
         </Button>
       </Toolbar>
       <Toolbar component="nav" variant="dense" sx={{ justifyContent: 'space-between', overflowX: 'auto' }}>
@@ -38,7 +52,7 @@ function Header(props) {
           </Link>
         ))}
       </Toolbar>
-    </React.Fragment>
+    </>
   );
 }
 

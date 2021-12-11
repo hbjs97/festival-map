@@ -8,7 +8,6 @@ export async function FAXIOS(data, authKey, method, url) {
       url: url,
       headers: {
         Authorization: authKey,
-        'Content-Type': 'application/json',
         'Content-Type': 'application/x-www-form-urlencoded',
       },
       data: data,
