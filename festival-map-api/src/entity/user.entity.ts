@@ -27,7 +27,7 @@ export class User {
     length: 30,
     unique: true,
   })
-  userName: string;
+  username: string;
 
   @Column('varchar', {
     name: 'display_name',
@@ -35,7 +35,7 @@ export class User {
     length: 30,
     unique: true,
   })
-  displayName: string;
+  displayname: string;
 
   @Column('datetime', {
     name: 'created_at',

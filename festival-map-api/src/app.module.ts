@@ -7,6 +7,10 @@ import * as path from 'path';
 import { BaseModule } from './base';
 import { CommonModule, ExceptionsFilter, LoggerMiddleware } from './common';
 import { configuration } from './config';
+import { FestivalModule } from './festival/festival.module';
+import { PostModule } from './post/post.module';
+import { ParkingLotModule } from './parking-lot/parking-lot.module';
+import { ReplyModule } from './post/reply/reply.module';
 
 dotenv.config({
   path: path.resolve('.env'),
@@ -28,9 +32,38 @@ dotenv.config({
       inject: [ConfigService],
     }),
 
-    // Service Modules
-    CommonModule, // Global
+    CommonModule,
     BaseModule,
+
+    FestivalModule,
+    RouterModule.register([
+      {
+        path: 'festivals',
+        module: FestivalModule,
+      },
+    ]),
+
+    ParkingLotModule,
+    RouterModule.register([
+      {
+        path: 'parking-lots',
+        module: ParkingLotModule,
+      },
+    ]),
+
+    PostModule,
+    RouterModule.register([
+      {
+        path: 'posts',
+        module: PostModule,
+        children: [
+          {
+            path: 'replies',
+            module: ReplyModule,
+          },
+        ],
+      },
+    ]),
   ],
   providers: [
     // Global Guard, Authentication check on all routers

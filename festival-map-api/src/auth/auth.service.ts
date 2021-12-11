@@ -9,21 +9,21 @@ import { JwtPayload, Payload } from './auth.interface';
 export class AuthService {
   constructor(private jwt: JwtService, private userService: UserService) {}
 
-  public async validateUser(userName: string, password: string): Promise<User> {
-    const user = await this.userService.findUserByUserName(userName, true);
+  public async validateUser(username: string, password: string): Promise<User> {
+    const user = await this.userService.findUserByUserName(username, true);
 
     if (!(await bcrypt.compare(password, user.password))) {
       throw new HttpException('password mismatched', HttpStatus.UNAUTHORIZED);
     }
 
-    return await this.userService.findUserByUserName(userName);
+    return await this.userService.findUserByUserName(username);
   }
 
   public signJwt(user: Payload): { access_token: string } {
     const payload: JwtPayload = {
       sub: user.userId,
       userId: user.userId,
-      userName: user.userName,
+      username: user.username,
       // roles: user.roles,
     };
 

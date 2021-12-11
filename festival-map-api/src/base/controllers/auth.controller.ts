@@ -11,7 +11,6 @@ import type { Request, Response } from 'express';
 import { User } from 'src/entity/user.entity';
 import { UserService } from 'src/shared/user';
 import { UserSignupDto } from 'src/shared/user/dto/user.signup.dto';
-
 import { AuthService, Payload, LocalAuthGuard, JwtAuthGuard } from '../../auth';
 import { Public, ReqUser } from '../../common';
 
@@ -27,7 +26,11 @@ export class AuthController {
 
   @Public()
   @Post('signup')
-  public signup(@Body() userSignupDto: UserSignupDto): Promise<User> {
+  public signup(
+    @Body() userSignupDto: UserSignupDto,
+    @Req() req,
+  ): Promise<User> {
+    console.log(req.body);
     return this.userService.createUser(userSignupDto);
   }
 

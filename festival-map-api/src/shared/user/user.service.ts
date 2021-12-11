@@ -18,14 +18,14 @@ export class UserService {
   }
 
   public async findUserByUserName(
-    userName: string,
+    username: string,
     withPassword = false,
   ): Promise<User> {
     const selectProps: (keyof User)[] = [
       'userId',
       'password',
-      'userName',
-      'displayName',
+      'username',
+      'displayname',
       'createdAt',
       'updatedAt',
       'deletedAt',
@@ -33,7 +33,7 @@ export class UserService {
     withPassword == true && selectProps.push('password');
     return await this.userRepository.findOneOrFail({
       where: {
-        userName: userName,
+        username: username,
       },
       select: selectProps,
     });
