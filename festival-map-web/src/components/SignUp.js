@@ -1,4 +1,3 @@
-import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -11,19 +10,34 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Copyright from './Copyright';
+import { STAGING } from '../lib/constant';
+import { useHistory } from 'react-router-dom';
+import { FAXIOS } from '../lib/common';
+import { useState } from 'react';
+import qs from 'qs';
 
 const theme = createTheme();
 
-export default function SignUp() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+function SignUp() {
+  const history = useHistory();
+  const [postValues, setPostValues] = useState({
+    username: undefined,
+    password: undefined,
+    displayname: undefined,
+  });
+
+  const handleChange = (prop) => (event) => {
+    setPostValues({ ...postValues, [prop]: event.target.value });
   };
+
+  async function signup() {
+    const res = await FAXIOS(qs.stringify(postValues), null, 'post', `${STAGING}/api/signup`);
+    if (res.status >= 400) {
+      alert(res.message);
+      return;
+    }
+    history.push('/login');
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -43,16 +57,19 @@ export default function SignUp() {
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+          <Box component="form" noValidate sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
-                <TextField required fullWidth id="email" label="Email Address" name="email" autoComplete="email" />
+                <TextField required fullWidth name="username" label="username" type="text" id="username" onChange={handleChange('username')} />
               </Grid>
               <Grid item xs={12}>
-                <TextField required fullWidth name="password" label="Password" type="password" id="password" autoComplete="new-password" />
+                <TextField required fullWidth name="password" label="password" type="password" id="password" autoComplete="new-password" onChange={handleChange('password')} />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField required fullWidth name="displayname" label="displayname" type="text" id="displayname" onChange={handleChange('displayname')} />
               </Grid>
             </Grid>
-            <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
+            <Button fullWidth variant="contained" sx={{ mt: 3, mb: 2 }} onClick={signup}>
               Sign Up
             </Button>
             <Grid container justifyContent="flex-end">
@@ -69,3 +86,5 @@ export default function SignUp() {
     </ThemeProvider>
   );
 }
+
+export default SignUp;

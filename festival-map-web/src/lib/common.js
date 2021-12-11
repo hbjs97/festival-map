@@ -3,13 +3,13 @@ import _ from 'lodash';
 
 export async function FAXIOS(data, authKey, method, url) {
   try {
-    console.log(url);
     const result = await axios({
       method: method,
       url: url,
       headers: {
         Authorization: authKey,
         'Content-Type': 'application/json',
+        'Content-Type': 'application/x-www-form-urlencoded',
       },
       data: data,
     });
@@ -20,8 +20,11 @@ export async function FAXIOS(data, authKey, method, url) {
       window.location.replace('/');
       return '토큰 인증 실패';
     }
-    console.log(error);
-    return error.response.data.error;
+    console.log(error.response.data.message);
+    return {
+      status: error.response.status,
+      message: error.response.data.message,
+    };
   }
 }
 
