@@ -27,7 +27,7 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(
     app,
     new DocumentBuilder()
-      .setTitle('CIMS API Documentation')
+      .setTitle('festival-map API Documentation')
       .setDescription('')
       .setVersion('1.0')
       .addBearerAuth(
