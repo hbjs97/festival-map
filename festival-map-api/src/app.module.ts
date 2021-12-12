@@ -58,7 +58,7 @@ dotenv.config({
         module: PostModule,
         children: [
           {
-            path: 'replies',
+            path: ':postId/replies',
             module: ReplyModule,
           },
         ],
