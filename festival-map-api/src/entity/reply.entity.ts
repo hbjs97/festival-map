@@ -18,7 +18,7 @@ export class Reply {
 
   @ManyToOne(() => User)
   @JoinColumn({ name: 'created_by', referencedColumnName: 'userId' })
-  createdBy: User;
+  createdBy: string;
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
