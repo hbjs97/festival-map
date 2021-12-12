@@ -19,10 +19,10 @@ export async function FAXIOS(data, authKey, method, url) {
       window.location.replace('/');
       return '토큰 인증 실패';
     }
-    console.log(error.response.data.message);
+    console.log(error.response?.data?.message);
     return {
-      status: error.response.status,
-      message: error.response.data.message,
+      status: error?.response?.status,
+      message: error?.response?.data?.message,
     };
   }
 }
