@@ -1,24 +1,23 @@
-import { Route, Switch } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { LOGIN_SUCCESS } from './redux/modules/login';
+import { Switch } from 'react-router-dom';
 import PublicRoute from './components/auth/PublicRoute';
+import PrivateRoute from './components/auth/PrivateRoute';
 import Blog from './components/Blog';
 import SignUp from './components/SignUp';
 import Login from './components/Login';
+import ParkingLot from './components/ParkingLot';
+import Board from './components/Board';
+import BoardView from './components/BoardView';
 
 function App() {
-  const loginStates = useSelector((state) => state.login);
-  const isLogin = loginStates.type === LOGIN_SUCCESS;
-
   return (
     <div className="App">
-      {/* v6, changed switch to routes  */}
       <Switch>
-        <PublicRoute restricted={false} component={SignUp} path="/signup" />
-        <PublicRoute restricted={false} component={Login} path="/login" />
-        <PublicRoute restricted={true} component={Blog} path="/" exact />
-        {/* <PublicRoute component={Register} path="/register" exact /> */}
-        {/* <PublicRoute component={Login} path="/login" exact /> <PrivateRoute component={MyPage} path="/mypage" exact /> <Route component={NotFound} /> */}
+        <PublicRoute restricted={false} component={SignUp} path="/signup" exact />
+        <PublicRoute restricted={false} component={Login} path="/login" exact />
+        <PublicRoute restricted={false} component={ParkingLot} path="/parking-lot" exact />
+        <PrivateRoute component={Board} path="/board" exact />
+        <PrivateRoute component={BoardView} path="/board/:id" exact />
+        <PublicRoute restricted={false} component={Blog} path="/" exact />
       </Switch>
     </div>
   );
