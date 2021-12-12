@@ -27,9 +27,6 @@ function Header(props) {
         <Typography component="h2" variant="h5" color="inherit" align="center" noWrap sx={{ flex: 1 }}>
           {title}
         </Typography>
-        <IconButton>
-          <SearchIcon />
-        </IconButton>
         <Button
           variant="outlined"
           size="small"
