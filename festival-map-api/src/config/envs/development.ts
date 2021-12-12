@@ -13,10 +13,5 @@ export const config = {
     synchronize: true,
     logging: true,
     entities: [`${__dirname}/../../entity/*.entity{.ts,.js}`],
-    // migrations: [`${__dirname}/../../migration/*.entity{.ts,.js}`],
-    // cli: {
-    //   entitiesDir: 'src/entity',
-    //   migrationsDir: 'src/migration',
-    // },
   },
 };
