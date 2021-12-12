@@ -1,8 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Festival } from 'src/entity/festival.entity';
-import { Repository } from 'typeorm';
+import { MoreThan, Repository } from 'typeorm';
 import { FestivalGetDto } from './dto/festival.get.dto';
+import dayjs from 'dayjs';
 
 @Injectable()
 export class FestivalService {
@@ -26,5 +27,17 @@ export class FestivalService {
       .andWhere(`${distanceSql} <= ${festivalGetDto.radius}`)
       .orderBy(`${distanceSql}`, 'ASC')
       .getRawMany();
+  }
+
+  public async getRecentFestivals(): Promise<Festival[]> {
+    return await this.festivalRepository.find({
+      where: {
+        fstvlStartDate: MoreThan(dayjs().format('YYYY-MM-DD')),
+      },
+      order: {
+        fstvlStartDate: 'ASC',
+      },
+      take: 10,
+    });
   }
 }
