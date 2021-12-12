@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import Grid from '@mui/material/Grid';
 import { useState } from 'react';
-import CustomNaverMap from './CustomNaverMap';
+import FestivalMap from './FestivalMap';
 
 function Main() {
   return (
@@ -15,7 +15,7 @@ function Main() {
         },
       }}
     >
-      <CustomNaverMap />
+      <FestivalMap />
     </Grid>
   );
 }
