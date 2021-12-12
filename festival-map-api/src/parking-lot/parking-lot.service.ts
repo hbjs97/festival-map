@@ -20,11 +20,22 @@ export class ParkingLotService {
        * POWER(SIN((longitude - ${parkingLotGetDto.longitude}) *  pi()/180 / 2), 2))))`;
 
     return await this.parkingLotRepository
-      .createQueryBuilder()
-      .addSelect(distanceSql, 'distance')
+      .createQueryBuilder('parkingLot')
+      .select([
+        'parkingLot.parking_lot_id',
+        'parkingLot.prkplceNm',
+        'parkingLot.rdnmadr',
+        'parkingLot.lnmadr',
+        'parkingLot.operDay',
+        'parkingLot.parkingchrgeInfo',
+        'parkingLot.phoneNumber',
+        'parkingLot.latitude',
+        'parkingLot.longitude',
+      ])
       .where(`${distanceSql} IS NOT NULL`)
       .andWhere(`${distanceSql} <= ${parkingLotGetDto.radius}`)
       .orderBy(`${distanceSql}`, 'ASC')
+      .take(150)
       .getRawMany();
   }
 }
