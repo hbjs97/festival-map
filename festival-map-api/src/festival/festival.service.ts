@@ -21,8 +21,17 @@ export class FestivalService {
        * POWER(SIN((longitude - ${festivalGetDto.longitude}) *  pi()/180 / 2), 2))))`;
 
     return await this.festivalRepository
-      .createQueryBuilder()
-      .addSelect(distanceSql, 'distance')
+      .createQueryBuilder('festival')
+      .select([
+        'festival.fstvlNm',
+        'festival.opar',
+        'festival.fstvlStartDate',
+        'festival.fstvlEndDate',
+        'festival.relateInfo',
+        'festival.rdnmadr',
+        'festival.latitude',
+        'festival.longitude',
+      ])
       .where(`${distanceSql} IS NOT NULL`)
       .andWhere(`${distanceSql} <= ${festivalGetDto.radius}`)
       .orderBy(`${distanceSql}`, 'ASC')
