@@ -32,6 +32,9 @@ export class Post {
   @Column({ name: 'content', length: 500 })
   content: string;
 
+  @Column('int', { name: 'view_count', default: 0 })
+  viewCount: number;
+
   @OneToMany((type) => Reply, (reply) => reply.post)
   replies: Reply[];
 }

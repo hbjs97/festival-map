@@ -31,6 +31,7 @@ export class PostController {
   public async getPostById(
     @Param('postId') postId: number,
   ): Promise<PostEntity> {
+    await this.postService.increaseViewCountById(postId);
     return await this.postService.getPostById(postId);
   }
 
