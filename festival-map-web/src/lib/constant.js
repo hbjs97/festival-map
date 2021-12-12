@@ -1,5 +1,5 @@
 // 주소 관련
-export const STAGING = 'http://localhost:6100';
+export const STAGING = process.env.REACT_APP_API_SERVER_URL || 'http://localhost:6100';
 
 export const API_ROUTE = {};
 
