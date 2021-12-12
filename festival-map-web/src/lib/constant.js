@@ -22,3 +22,9 @@ export const COPY_RIGHT_URL = 'http://210.117.182.234:8080';
 export const defaultPosition = { lat: 37.3595704, lng: 127.105399 };
 
 export const mapRadius = 30; // km
+
+export const sections = [
+  { title: '메인', url: '/' },
+  { title: '편의시설', url: '/parking-lot' },
+  { title: '게시판', url: '/board' },
+];
