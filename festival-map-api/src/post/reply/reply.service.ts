@@ -18,8 +18,8 @@ export class ReplyService {
   public async getReplies(
     postId: number,
     replyGetDto: ReplyGetDto,
-  ): Promise<Reply[]> {
-    return this.replyRepository.find({
+  ): Promise<[Reply[], number]> {
+    return this.replyRepository.findAndCount({
       where: {
         post: {
           postId,

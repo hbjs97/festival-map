@@ -23,7 +23,7 @@ export class ReplyController {
   public async getReplies(
     @Param('postId') postId: number,
     @Query() replyGetDto: ReplyGetDto,
-  ): Promise<Reply[]> {
+  ): Promise<[Reply[], number]> {
     return await this.replyService.getReplies(postId, replyGetDto);
   }
 
