@@ -5,9 +5,10 @@ import Stack from '@mui/material/Stack';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
+import { isArray } from 'lodash';
 
 function Sidebar(props) {
-  const { archives, description, title } = props;
+  const { featuredFestivals, description, title } = props;
 
   return (
     <Grid item xs={12} md={4}>
@@ -18,13 +19,20 @@ function Sidebar(props) {
         <Typography>{description}</Typography>
       </Paper>
       <Typography variant="h6" gutterBottom sx={{ mt: 3 }}>
-        Archives
+        개최 예정
       </Typography>
-      {archives.map((archive) => (
-        <Link display="block" variant="body1" href={archive.url} key={archive.title}>
-          {archive.title}
-        </Link>
-      ))}
+      {isArray(featuredFestivals) &&
+        featuredFestivals.map((festival) => {
+          return festival.homepageUrl ? (
+            <Link display="block" variant="body1" key={festival.fstvlNm} href={festival.homepageUrl.includes('http') ? festival.homepageUrl : `http://${festival.homepageUrl}`}>
+              {festival.fstvlNm}
+            </Link>
+          ) : (
+            <Link display="block" variant="body1" key={festival.fstvlNm}>
+              {festival.fstvlNm}
+            </Link>
+          );
+        })}
     </Grid>
   );
 }
@@ -37,12 +45,6 @@ Sidebar.propTypes = {
     })
   ).isRequired,
   description: PropTypes.string.isRequired,
-  social: PropTypes.arrayOf(
-    PropTypes.shape({
-      icon: PropTypes.elementType.isRequired,
-      name: PropTypes.string.isRequired,
-    })
-  ).isRequired,
   title: PropTypes.string.isRequired,
 };
 
