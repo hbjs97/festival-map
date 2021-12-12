@@ -38,12 +38,12 @@ function Sidebar(props) {
 }
 
 Sidebar.propTypes = {
-  archives: PropTypes.arrayOf(
+  featuredFestivals: PropTypes.arrayOf(
     PropTypes.shape({
-      title: PropTypes.string.isRequired,
-      url: PropTypes.string.isRequired,
+      fstvlNm: PropTypes.string.isRequired,
+      homepageUrl: PropTypes.string,
     })
-  ).isRequired,
+  ),
   description: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
 };

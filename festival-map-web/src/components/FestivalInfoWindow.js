@@ -1,16 +1,16 @@
 import React from 'react';
 
 function FestivalInfoWindow(props) {
-  const { Festival_fstvlNm, Festival_opar, Festival_fstvlStartDate, Festival_fstvlEndDate, Festival_relateInfo, Festival_rdnmadr } = props;
+  const { festival_fstvlNm, festival_opar, festival_fstvlStartDate, festival_fstvlEndDate, festival_relateInfo, festival_rdnmadr } = props;
   return (
     <div style={{ margin: '10px' }}>
-      <h3>{Festival_fstvlNm}</h3>
+      <h3>{festival_fstvlNm}</h3>
       <p>
-        {Festival_opar}
+        {festival_opar}
         <br />
-        {Festival_fstvlStartDate && Festival_fstvlEndDate && `${Festival_fstvlStartDate} ~ ${Festival_fstvlEndDate}`}
+        {festival_fstvlStartDate && festival_fstvlEndDate && `${festival_fstvlStartDate} ~ ${festival_fstvlEndDate}`}
         <br />
-        {Festival_relateInfo || Festival_rdnmadr}
+        {festival_relateInfo || festival_rdnmadr}
       </p>
     </div>
   );

@@ -21,6 +21,11 @@ function Header(props) {
     dispatch(logoutThunk());
   }, [dispatch]);
 
+  const moveToPage = (e, url) => {
+    e.preventDefault();
+    history.push(`${url}`);
+  };
+
   return (
     <>
       <Toolbar sx={{ borderBottom: 1, borderColor: 'divider' }}>
@@ -44,7 +49,7 @@ function Header(props) {
       </Toolbar>
       <Toolbar component="nav" variant="dense" sx={{ justifyContent: 'space-between', overflowX: 'auto' }}>
         {sections.map((section) => (
-          <Link color="inherit" noWrap key={section.title} variant="" href={section.url} sx={{ p: 1, flexShrink: 0, textDecoration: 'none', fontWeight: 'bold' }}>
+          <Link color="inherit" noWrap key={section.title} variant="" onClick={(e) => moveToPage(e, section.url)} sx={{ p: 1, flexShrink: 0, textDecoration: 'none', fontWeight: 'bold' }}>
             {section.title}
           </Link>
         ))}
