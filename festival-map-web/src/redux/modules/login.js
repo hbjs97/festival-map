@@ -102,7 +102,7 @@ export function loginThunk(loginInfo, history) {
       }
       localStorage.setItem('accessToken', res.data.access_token);
       dispatch(setLoginSuccess(res.data));
-      history.push('/');
+      history.push(`${process.env.REACT_APP_ROUTER_PREFIX}/`);
     } catch (error) {
       dispatch(setLoginFail());
       alert(error);

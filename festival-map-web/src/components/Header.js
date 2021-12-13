@@ -38,9 +38,9 @@ function Header(props) {
           onClick={() => {
             if (isLogin) {
               logout();
-              history.push('/');
+              history.push(`${process.env.REACT_APP_ROUTER_PREFIX}/`);
             } else {
-              history.push('/login');
+              history.push(`${process.env.REACT_APP_ROUTER_PREFIX}/login`);
             }
           }}
         >

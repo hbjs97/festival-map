@@ -6,7 +6,7 @@ import { LOGIN_SUCCESS } from '../../redux/modules/login';
 function PrivateRoute({ component: Component, ...rest }) {
   const loginStates = useSelector((state) => state.login);
   const isLogin = loginStates.type === LOGIN_SUCCESS;
-  return <Route {...rest} render={(props) => (isLogin ? <Component {...props} /> : <Redirect to="/login" />)} />;
+  return <Route {...rest} render={(props) => (isLogin ? <Component {...props} /> : <Redirect to={`${process.env.REACT_APP_ROUTER_PREFIX}/login`} />)} />;
 }
 
 export default PrivateRoute;

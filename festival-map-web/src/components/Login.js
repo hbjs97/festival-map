@@ -23,14 +23,6 @@ export default function Login() {
   const username = useRef('');
   const password = useRef('');
 
-  // useEffect(() => {
-  //   console.log(postValues);
-  // }, [postValues]);
-
-  // const handleChange = (prop) => (event) => {
-  //   setPostValues({ ...postValues, [prop]: event.target.value });
-  // };
-
   const loginSubmit = useCallback(() => {
     dispatch(loginThunk({ username: username.current.value, password: password.current.value }, history));
   }, [dispatch]);
@@ -85,7 +77,7 @@ export default function Login() {
               <Grid container>
                 <Grid item xs></Grid>
                 <Grid item>
-                  <Link href="/signup" variant="body2">
+                  <Link variant="body2" onClick={() => history.push(`${process.env.REACT_APP_ROUTER_PREFIX}/signup`)}>
                     {"Don't have an account? Sign Up"}
                   </Link>
                 </Grid>

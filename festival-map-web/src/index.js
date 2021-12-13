@@ -3,11 +3,12 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { store, persistor } from './store';
 import { PersistGate } from 'redux-persist/integration/react';
 import { RenderAfterNavermapsLoaded } from 'react-naver-maps';
+import NotFound from './components/NotFound';
 
 ReactDOM.render(
   // <React.StrictMode>
@@ -15,7 +16,10 @@ ReactDOM.render(
     <BrowserRouter>
       <Provider store={store}>
         <PersistGate persistor={persistor}>
-          <App />
+          <Switch>
+            <Route path={process.env.REACT_APP_ROUTER_PREFIX} component={App} />
+            <Route path="*" component={NotFound} />
+          </Switch>
         </PersistGate>
       </Provider>
     </BrowserRouter>

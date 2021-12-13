@@ -43,12 +43,12 @@ function Board(props) {
 
   const moveToDetailPage = (e, postId) => {
     e.preventDefault();
-    history.push(`/board/${postId}`);
+    history.push(`${process.env.REACT_APP_ROUTER_PREFIX}/board/${postId}`);
   };
 
   const moveToEnrollPage = (e) => {
     e.preventDefault();
-    history.push(`/board/enroll`);
+    history.push(`${process.env.REACT_APP_ROUTER_PREFIX}/board/enroll`);
   };
 
   async function getPosts() {

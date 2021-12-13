@@ -36,7 +36,7 @@ function SignUp() {
       alert(res.message);
       return;
     }
-    history.push('/login');
+    history.push(`${process.env.REACT_APP_ROUTER_PREFIX}/login`);
   }
 
   return (
@@ -74,7 +74,7 @@ function SignUp() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="login" variant="body2">
+                <Link variant="body2" onClick={() => history.push(`${process.env.REACT_APP_ROUTER_PREFIX}/login`)}>
                   Already have an account? Sign in
                 </Link>
               </Grid>

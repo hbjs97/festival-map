@@ -1,7 +1,4 @@
-// 주소 관련
 export const STAGING = process.env.REACT_APP_API_SERVER_URL || 'http://localhost:6100';
-
-export const API_ROUTE = {};
 
 export const PER_PAGE = 10;
 
@@ -17,14 +14,20 @@ export const REG_COMPANY_REGISTRATION = /^[\d{3}-\d{2}-\d{5}]{12}$/;
 export const REG_NUMBER = /^\d+$/;
 export const WON = /\B(?=(\d{3})+(?!\d))/g;
 
-export const COPY_RIGHT_URL = 'http://210.117.182.234:8080';
+export const COPY_RIGHT_URL = `http://210.117.182.234:8080/${process.env.REACT_APP_ROUTER_PREFIX}`;
 
 export const defaultPosition = { lat: 37.3595704, lng: 127.105399 };
 
 export const mapRadius = 30; // km
 
 export const sections = [
-  { title: '메인', url: '/' },
-  { title: '편의시설', url: '/parking-lot' },
-  { title: '게시판', url: '/board' },
+  { title: '메인', url: `${process.env.REACT_APP_ROUTER_PREFIX}/` },
+  {
+    title: '편의시설',
+    url: `${process.env.REACT_APP_ROUTER_PREFIX}/parking-lot`,
+  },
+  {
+    title: '게시판',
+    url: `${process.env.REACT_APP_ROUTER_PREFIX}/board`,
+  },
 ];
