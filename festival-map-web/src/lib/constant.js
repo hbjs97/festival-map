@@ -14,7 +14,7 @@ export const REG_COMPANY_REGISTRATION = /^[\d{3}-\d{2}-\d{5}]{12}$/;
 export const REG_NUMBER = /^\d+$/;
 export const WON = /\B(?=(\d{3})+(?!\d))/g;
 
-export const COPY_RIGHT_URL = `http://210.117.182.234:8080/${process.env.REACT_APP_ROUTER_PREFIX}`;
+export const COPY_RIGHT_URL = `http://210.117.182.234:8080${process.env.REACT_APP_ROUTER_PREFIX}`;
 
 export const defaultPosition = { lat: 37.3595704, lng: 127.105399 };
 
