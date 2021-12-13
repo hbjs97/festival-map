@@ -1,5 +1,5 @@
 import { FAXIOS } from '../../lib/common';
-import { API_ROUTE, STAGING } from '../../lib/constant';
+import { STAGING } from '../../lib/constant';
 import qs from 'qs';
 
 export const LOGOUT = 'festival-map/login/LOGOUT';
@@ -116,23 +116,6 @@ export function logoutThunk() {
       localStorage.clear();
       dispatch(setLogout());
     } catch (error) {
-      alert(error);
-    }
-  };
-}
-
-export function refreshThunk() {
-  return async (dispatch) => {
-    try {
-      dispatch(setRefreshRequest());
-      const res = await FAXIOS(null, localStorage.getItem('refreshToken'), 'post', `${API_ROUTE.auth}/refresh`);
-      if (res.status >= 400) {
-        throw new Error(res.message);
-      }
-      localStorage.setItem('accessToken', res.data.access_token);
-      dispatch(setLoginSuccess(res.data));
-    } catch (error) {
-      dispatch(setLoginFail());
       alert(error);
     }
   };
