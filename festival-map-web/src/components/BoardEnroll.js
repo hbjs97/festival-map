@@ -48,7 +48,7 @@ function BoardEnroll(props) {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Container maxWidth="lg">
-        <Header title="Festival Map" sections={sections} />
+        <Header title="축제 한가득" sections={sections} />
         <main style={{ marginTop: 30 }}>
           <Box>
             <MultilineTextField multiline={false} value={postValues.title} placeholder="제목" onChange={handleChange('title')} />

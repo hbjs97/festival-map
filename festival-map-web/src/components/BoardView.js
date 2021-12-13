@@ -87,7 +87,7 @@ function BoardView(props) {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Container maxWidth="lg">
-        <Header title="Festival Map" sections={sections} />
+        <Header title="축제 한가득" sections={sections} />
         <main style={{ marginTop: 30 }}>
           <Card>
             <CardHeader

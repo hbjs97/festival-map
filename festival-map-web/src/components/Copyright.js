@@ -8,7 +8,7 @@ function Copyright(props) {
     <Typography variant="body2" color="text.secondary" align="center" {...sx}>
       {'Copyright © '}
       <Link color="inherit" href={COPY_RIGHT_URL}>
-        Festival Map
+        축제 한가득
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}

@@ -35,9 +35,9 @@ function Blog(props) {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Container maxWidth="lg">
-        <Header title="Festival Map" sections={sections} />
+        <Header title="축제 한가득" sections={sections} />
         <main>
-          <MainFeaturedPost post={{ title: '메인 타이틀 넣어주세요.', description: '부가 설명 넣어주세요.', image: 'https://source.unsplash.com/random', linkText: '지도' }} />
+          <MainFeaturedPost post={{ title: '축제 한가득', description: '축제 정보와 주변의 주차공간을 확인해보세요. ', image: 'https://source.unsplash.com/random', linkText: '지도' }} />
           <Grid container spacing={4}>
             {isArray(featuredPost) && featuredPost.slice(0, 2).map((post) => <FeaturedPost key={post.fstvlNm} post={post} />)}
           </Grid>
